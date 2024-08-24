@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DonationApp() {
-    var currentScreen by remember { mutableStateOf("Home") }
+    var currentScreen by remember { mutableStateOf("Inicio") }
 
     Scaffold(
         topBar = {
@@ -53,15 +53,15 @@ fun DonationApp() {
         }
     ) { innerPadding ->
         when (currentScreen) {
-            "Home" -> HomeScreen(
+            "Inicio" -> HomeScreen(
                 modifier = Modifier.padding(innerPadding),
                 onNavigate = { screen -> currentScreen = screen }
             )
-            "Login" -> LoginScreen(modifier = Modifier.padding(innerPadding))
-            "Donation" -> DonationFormScreen(modifier = Modifier.padding(innerPadding))
-            "ThankYou" -> ThankYouScreen(
+            "Iniciar Sesión" -> LoginScreen(modifier = Modifier.padding(innerPadding))
+            "Donación" -> DonationFormScreen(modifier = Modifier.padding(innerPadding))
+            "Gracias" -> ThankYouScreen(
                 modifier = Modifier.padding(innerPadding),
-                onBack = { currentScreen = "Home" } // Aquí se pasa el lambda para regresar a la pantalla de inicio
+                onBack = { currentScreen = "Inicio" }
             )
         }
     }
@@ -71,28 +71,28 @@ fun DonationApp() {
 fun BottomNavigationBar(onTabSelected: (String) -> Unit, currentScreen: String) {
     NavigationBar {
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Home Icon") },
-            label = { Text("Home") },
-            selected = currentScreen == "Home",
-            onClick = { onTabSelected("Home") }
+            icon = { Icon(Icons.Default.Home, contentDescription = "Icono de Inicio") },
+            label = { Text("Inicio") },
+            selected = currentScreen == "Inicio",
+            onClick = { onTabSelected("Inicio") }
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.AccountBox, contentDescription = "Login Icon") },
-            label = { Text("Login") },
-            selected = currentScreen == "Login",
-            onClick = { onTabSelected("Login") }
+            icon = { Icon(Icons.Default.AccountBox, contentDescription = "Icono de Iniciar Sesión") },
+            label = { Text("Iniciar Sesión") },
+            selected = currentScreen == "Iniciar Sesión",
+            onClick = { onTabSelected("Iniciar Sesión") }
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = "Donations Icon") },
-            label = { Text("Donations") },
-            selected = currentScreen == "Donation",
-            onClick = { onTabSelected("Donation") }
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Icono de Donaciones") },
+            label = { Text("Donación") },
+            selected = currentScreen == "Donación",
+            onClick = { onTabSelected("Donación") }
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.ThumbUp, contentDescription = "Thank You Icon") },
-            label = { Text("Thank You") },
-            selected = currentScreen == "ThankYou",
-            onClick = { onTabSelected("ThankYou") }
+            icon = { Icon(Icons.Default.ThumbUp, contentDescription = "Icono de Gracias") },
+            label = { Text("Gracias") },
+            selected = currentScreen == "Gracias",
+            onClick = { onTabSelected("Gracias") }
         )
     }
 }
@@ -107,50 +107,48 @@ fun HomeScreen(modifier: Modifier = Modifier, onNavigate: (String) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome to the Donation App!",
+            text = "¡Bienvenido a la Aplicación de Donaciones!",
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Puedes agregar una imagen o ícono aquí
         Icon(
             imageVector = Icons.Default.Favorite,
-            contentDescription = "App Icon",
+            contentDescription = "Icono de la Aplicación",
             modifier = Modifier.size(120.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "This app helps you make donations easily and efficiently. You can track your donations, manage your profile, and more.",
+            text = "Esta aplicación te ayuda a hacer donaciones de manera fácil y eficiente. Puedes seguir tus donaciones, gestionar tu perfil y más.",
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Botones para navegar a otras partes de la app
-        Button(onClick = { onNavigate("Login") }) {
-            Text("Login")
+
+        Button(onClick = { onNavigate("Iniciar Sesión") }) {
+            Text("Iniciar Sesión")
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Button(onClick = { onNavigate("Donation") }) {
-            Text("Make a Donation")
+        Button(onClick = { onNavigate("Donación") }) {
+            Text("Hacer una Donación")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Información de contacto o enlaces importantes
         Text(
-            text = "For support, contact us at support@donationapp.com",
+            text = "Para soporte, contáctanos en soporte@donationapp.com",
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center
         )
     }
 }
-
 
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier) {
@@ -164,14 +162,14 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Login or Register Here", style = MaterialTheme.typography.headlineLarge)
+        Text(text = "Inicia Sesión o Regístrate Aquí", style = MaterialTheme.typography.headlineLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text("Username") },
+            label = { Text("Nombre de Usuario") },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -180,24 +178,26 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text("Contraseña") },
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { /* Handle login logic here */ }) {
-            Text("Login")
+        Button(onClick = {  }) {
+            Text("Iniciar Sesión")
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Button(onClick = { /* Handle registration logic here */ }) {
-            Text("Register")
+        Button(onClick = { }) {
+            Text("Registrarse")
         }
     }
-}@Composable
+}
+
+@Composable
 fun DonationFormScreen(modifier: Modifier = Modifier) {
     var paymentMethod by remember { mutableStateOf("") }
     var accountNumber by remember { mutableStateOf("") }
@@ -211,14 +211,14 @@ fun DonationFormScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Donation Form", style = MaterialTheme.typography.headlineLarge)
+        Text(text = "Formulario de Donación", style = MaterialTheme.typography.headlineLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = paymentMethod,
             onValueChange = { paymentMethod = it },
-            label = { Text("Payment Method") },
+            label = { Text("Método de Pago") },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -227,7 +227,7 @@ fun DonationFormScreen(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = accountNumber,
             onValueChange = { accountNumber = it },
-            label = { Text("Account Number") },
+            label = { Text("Número de Cuenta") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
@@ -237,7 +237,7 @@ fun DonationFormScreen(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = amount,
             onValueChange = { amount = it },
-            label = { Text("Amount") },
+            label = { Text("Cantidad") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
@@ -247,14 +247,14 @@ fun DonationFormScreen(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = bank,
             onValueChange = { bank = it },
-            label = { Text("Bank") },
+            label = { Text("Banco") },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { /* Handle donation logic here */ }) {
-            Text("Submit Donation")
+        Button(onClick = { /* Manejar la lógica de donación aquí */ }) {
+            Text("Enviar Donación")
         }
     }
 }
@@ -268,23 +268,22 @@ fun ThankYouScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Thank You for Your Donation!", style = MaterialTheme.typography.headlineLarge)
+        Text(text = "¡Gracias por tu Donación!", style = MaterialTheme.typography.headlineLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Your donation has been successfully processed.",
+            text = "Tu donación ha sido procesada exitosamente.",
             style = MaterialTheme.typography.bodyLarge
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(onClick = { onBack() }) {
-            Text("Back to Home")
+            Text("Regresar a Inicio")
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
